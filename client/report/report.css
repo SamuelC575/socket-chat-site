@@ -64,6 +64,5 @@ body {
 }
 
 input, #submit {
-    transform: translate(0,20vh);
+    transform: translate(0,10vh);
 }
-
