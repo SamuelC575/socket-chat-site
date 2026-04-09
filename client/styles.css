@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 5vh;
+}
+
+
+#message-container {
+    width: 90vw;
+    height: 70vh;
+    border: 2vh solid black;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
+    border-radius: 5%
+}
+
+
+[id*=input] {
+    width: 50vw;
+    height: 8vh;
+    position: absolute;
+    border: 2vh solid black;
+    font-size: 50px;
+    left: 65vw;
+    transform: translate(-100%,0%);
+    border-radius: 2.5%;
+    background: white;
+}
+
+.chat-input, .user-input {
+    position: fixed;
+    top: 73vh;
+    left: 10vw;
+    padding: 2vh;
+}
+
+[id*=label] {
+    font-size: 7vh;
+    position: absolute;
+    left: -7vw;
+}
+
+[id*=button] {
+    width: 15vw;
+    height: 12vh;
+    border: 1vh solid black;
+    font-size: 3vw;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 70vw;
+    border-radius: 2.5%;
+    transition: 200ms ease-out;
+
+}
+
+[id*=button]:hover, .button:hover {
+    background: peachpuff;
+    border-color: gray;
+    transition: 200ms ease-out;
+    cursor: pointer;
+}
+
+#lobby-input {
+    border-radius: 10%;
+    border: 1.5vh solid black;
+    position: absolute;
+    width: 10.2vw;
+    height: 8.5vh;
+    left: 5.9vw;
+}
+
+.user-input {
+    position: absolute;
+    top: 85.5vh;
+}
+
+#lobby-button {
+    position: absolute;
+    width: 12vw;
+    height: 12vh;
+    left: -6vw;
+    border-radius: 10%;
+}
+
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#message-container * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#message-container {
+    max-height: 70vh;   /* or */
+    height: 70vh;
+    overflow-y: auto;
+}
+
+#message-container * {
+    border-bottom: 0.5vw solid black;
+}
+
+#message-container > div:nth-child(2n) {
+    background-color: lightskyblue;
+}
+
+#message-container > div:nth-child(2n + 1) {
+    background-color: rgb(0, 134, 229);
+}
+
+.button {
+    width: 2vw;
+    height: 5vh;
+    text-decoration: none;
+    border: 0.4vw solid black;
+    position: absolute;
+    top: 1vh;
+    left: 0.7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30%;
+}
+
+.blue {
+    color: blue;
+    background: rgb(135, 177, 235);
+    border-color: rgb(0, 89, 255);
+}
+
+.red {
+    color: white;
+    background: tomato;
+    border-color: red;
+}
+
+.green {
+    color: white;
+    background: rgb(14, 255, 2);
+    border-color: green;
+}
+
+.blue {
+    color: white;
+    background: rgb(53, 167, 255);
+    border-color: rgb(0, 119, 255);
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+
+    background: linear-gradient(to bottom right, skyblue,rgb(1, 155, 155),rgb(245, 196, 0));
+    background-size: 600% 600%;
+
+    animation: gradientMove 8s ease-in infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
