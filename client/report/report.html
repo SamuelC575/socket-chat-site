@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feedback</title>
+    <link rel="stylesheet" href="./report.css">
+</head>
+<body>
+    <h1>User Feedback</h1>
+    <a href="../index.html" id="return">< Return <</a>
+    <input type="text" id="feedback" placeholder="Feedback/Bug Reports">
+    <input type="text" id="username" placeholder="Guest/Username">
+    <button type="button" id="submit">Submit</button>
+
+    <!-- Include Socket.IO client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./report.js"></script>
+</body>
+</html>

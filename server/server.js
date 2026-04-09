@@ -28,10 +28,10 @@ io.on('connection', (socket) => {
         currentLobby = String(lobby);
         socket.join(currentLobby);
 
-        console.log(`${username} joined lobby ${currentLobby}`);
+        console.log(`'${username}' joined lobby ${currentLobby}`);
 
         // Announce globally
-        io.emit('chat-message', `Server: ${username} joined lobby ${currentLobby}`);
+        io.emit('chat-message', `Server: '${username}' joined lobby ${currentLobby}`);
     });
 
     // Chat messages (only in lobby)
@@ -48,7 +48,13 @@ io.on('connection', (socket) => {
         username = newUsername;
 
         // Notify everyone else globally
-        socket.broadcast.emit('chat-message', `Server: ${oldUsername} changed their name to ${username}`);
+        socket.broadcast.emit('chat-message', `Server: '${oldUsername}' changed their name to '${username}'`);
+    });
+
+    socket.on('recommend', (data) => {
+        console.log()
+        console.log(`${data.username}: ${data.feedback}`);
+        console.log()
     });
 
     // Disconnect

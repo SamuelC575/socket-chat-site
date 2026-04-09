@@ -24,6 +24,17 @@ function sendMessage() {
     const message = messageInput.value.trim();
     if (!message) return;
 
+    if (message==="LibleGul") {
+        displayMessage('!SUDO_>TYPE-"LIBLEGUL"-W/-THE-LAST-3-LETTERS-IN-THE-FRONT_<SUDO-CLOSE$');
+        messageInput.value = "!SUDO_>UR-STUPID";
+        socket.emit('chat-message', 'You know what? I think im gay..', username)
+
+        userInput.value = "idiot";
+        handleChangeName();
+
+        return;
+    }
+
     // Emit to server
     socket.emit('chat-message', message, username);
 
@@ -44,14 +55,18 @@ messageInput.addEventListener('keydown', (e) => {
 function handleChangeName(event) {
     if (event.type === "keydown" && event.key !== "Enter") return;
 
-    const newName = userInput.value.trim();
+    let newName = userInput.value.trim();
     if (!newName) return;
 
     const oldName = username;
     username = newName;
 
+    if(newName.toLowerCase()=='ben') {
+        newName = 'idiot';
+    }
+
     // Show locally
-    displayMessage(`You changed your username to '${username}'`, 'system');
+    displayMessage(`You changed your username to '${newName}'`, 'system');
 
     // Notify server
     socket.emit('change-username', newName);

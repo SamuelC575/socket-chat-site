@@ -4,26 +4,53 @@
 }
 
 body {
-    height: 100vh;
+    height: 120vh;
     margin: 0;
 
     background: linear-gradient(black,red);
-
 }
 
 
 .button {
     position: absolute;
     width: 100vw;
-    height: 5vh;
-    border: 10px solid white;
+    height: 11vh;
+    border-top: 10px solid white;
     text-decoration: none;
-    font-size: 5vh;
+    font-size: 7vh;
     font-weight: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+
+.list {
+    color: white;
+    position: absolute;
+    left: 1vw;
+    top:7vh;
+    width: 100vw;
+    font-size: 3.5vh;
+}
+
+#design {
+    top: 14vh;
+}
+
+#dev {
+    top: 21vh;
+}
+
+#tester {
+    top: 28vh;
+}
+
+#date {
+    top: 35vh;
+}
+
 
 .center-top {
     position: absolute;
@@ -35,7 +62,7 @@ body {
 .center-bottom {
     position: absolute;
     left: 50;
-    bottom: 0%;
+    bottom: -30%;
     transform: translate(0%,0);
 }
 
@@ -53,4 +80,61 @@ body {
     width: 100vw;
     border-bottom: 5px solid white;
     color: white;
+}
+
+.scrollable-section {
+    height: 130vh;
+    margin: 0;
+
+    background: linear-gradient(to bottom,skyblue,limegreen);
+
+    font-size: 2vw;
+
+    position: absolute;
+    left: 6vw;
+    top: 70vh;
+
+    width: 80%;              /* Adjust width as needed */
+    max-width: 100%;        /* Optional max width */
+    height: 300px;           /* Fixed height for scrolling */
+    padding: 20px;
+    border: 2vw solid teal;
+    border-radius: 8px;
+    overflow-y: auto;        /* Enables vertical scroll */
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    line-height: 1.5;        /* Makes text more readable */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Optional: Customize scrollbar for modern browsers */
+.scrollable-section::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollable-section::-webkit-scrollbar-track {
+  background:   rgb(0, 132, 255);
+  border-radius: 5px;
+}
+
+.scrollable-section::-webkit-scrollbar-thumb {
+  background: peachpuff;
+  border-radius: 5px;
+}
+
+.scrollable-section::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+/* Paragraph styling inside scrollable section */
+.scrollable-section p {
+  margin-bottom: 1em;
+}
+
+#section2 {
+    position: absolute;
+    top: 55vh;
+    color: skyblue;
+    font-size: 5vh;
 }
