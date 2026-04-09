@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
         console.log(`${username} joined lobby ${currentLobby}`);
 
         // Announce globally
-        io.emit('chat-message', `Server:${username} joined lobby ${currentLobby}`);
+        io.emit('chat-message', `Server: ${username} joined lobby ${currentLobby}`);
     });
 
     // Chat messages (only in lobby)
