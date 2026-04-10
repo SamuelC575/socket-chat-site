@@ -46,7 +46,8 @@
 
 #list-open {
     position: absolute;
-    transform: translate(96vw,6vh);
+    top: 7.5vh;
+    left: 96.6vw;
     width: 2.8vw;
     height: 6.5vh;
     display: flex;
