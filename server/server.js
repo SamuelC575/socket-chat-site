@@ -1,8 +1,3 @@
-// cd /Users/samchoi/Documents/HTML\ Projects/Socket.io-Chat
-// git add .
-// git commit -m ""
-// git push origin main
-
 const express = require('express');
 const path = require('path');
 const http = require('http');
