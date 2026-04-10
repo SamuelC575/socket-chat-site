@@ -5,17 +5,30 @@ const userButton = document.getElementById('user-button');
 const lobbyInput = document.getElementById('lobby-input');
 const lobbyButton = document.getElementById('lobby-button');
 const container = document.getElementById('message-container');
+const lobbyVisual = document.getElementById('lobby-number');
 
 let username = 'Guest';
 let lobby = '1';
 
 const socket = io();
 
-// 🔹 On connect → join default lobby
+let lobbynumber = 1;
+lobbyVisual.textContent = lobbynumber;
+
+// =======================
+// CONNECT
+// =======================
 socket.on('connect', () => {
-    displayMessage(`Connected as ${socket.id}`, 'special');
+    const id = socket.id;
+    displayMessage(`Connected as ${id}`, 'special');
+
     socket.emit('join-lobby', lobby);
 });
+
+const listButton = document.getElementById('list-open');
+listButton.addEventListener('click', openList);
+
+
 
 // =======================
 // SEND MESSAGE
@@ -24,10 +37,12 @@ function sendMessage() {
     const message = messageInput.value.trim();
     if (!message) return;
 
-    if (message==="LibleGul") {
+    // Easter egg
+    if (message === "LibleGul") {
         displayMessage('!SUDO_>TYPE-"LIBLEGUL"-W/-THE-LAST-3-LETTERS-IN-THE-FRONT_<SUDO-CLOSE$');
         messageInput.value = "!SUDO_>UR-STUPID";
-        socket.emit('chat-message', 'You know what? I think im gay..', username)
+
+        socket.emit('chat-message', 'You know what? I think im gay..');
 
         userInput.value = "idiot";
         handleChangeName();
@@ -35,16 +50,17 @@ function sendMessage() {
         return;
     }
 
-    // Emit to server
-    socket.emit('chat-message', message, username);
+    // send to server (NO username anymore)
+    socket.emit('chat-message', message);
 
-    // Show locally
+    // local display
     displayMessage(`You: ${message}`);
 
     messageInput.value = "";
 }
 
 sendButton.addEventListener('click', sendMessage);
+
 messageInput.addEventListener('keydown', (e) => {
     if (e.key === "Enter") sendMessage();
 });
@@ -58,17 +74,16 @@ function handleChangeName(event) {
     let newName = userInput.value.trim();
     if (!newName) return;
 
-    const oldName = username;
-    username = newName;
-
-    if(newName.toLowerCase()=='ben') {
+    // fix name rule BEFORE assigning
+    if (newName.toLowerCase() === 'ben') {
         newName = 'idiot';
     }
 
-    // Show locally
+    const oldName = username;
+    username = newName;
+
     displayMessage(`You changed your username to '${newName}'`, 'system');
 
-    // Notify server
     socket.emit('change-username', newName);
 
     userInput.value = "";
@@ -87,9 +102,12 @@ function handleLobbyChange(event) {
 
     if (num > 0 && num < 11 && Number.isInteger(num)) {
         lobby = String(num);
+
         socket.emit('join-lobby', lobby);
 
-        // Clear chat on lobby switch
+        lobbynumber = num;
+        lobbyVisual.textContent = lobbynumber;
+
         container.innerHTML = "";
         displayMessage(`Joined lobby ${lobby}`, 'system');
     } else {
@@ -102,27 +120,38 @@ function handleLobbyChange(event) {
 lobbyButton.addEventListener('click', handleLobbyChange);
 lobbyInput.addEventListener('keydown', handleLobbyChange);
 
-// receive
+// =======================
+// RECEIVE CHAT
+// =======================
 socket.on('chat-message', (message) => {
-    if(message.startsWith("Server")) {
-        displayMessage(message, 'system')
+    if (message.startsWith("Server:")) {
+        displayMessage(message, 'system');
     } else {
-        displayMessage(message,'chat')
+        displayMessage(message, 'chat');
     }
 });
 
-// display
-function displayMessage(message, type="chat") {
+// =======================
+// (OPTIONAL) LOBBY DATA FROM SERVER
+// =======================
+socket.on('lobby-data', (data) => {
+    console.log("Lobby update:", data);
+});
+
+// =======================
+// DISPLAY MESSAGE
+// =======================
+function displayMessage(message, type = "chat") {
     const div = document.createElement('div');
     div.textContent = message;
 
     if (type === "system") {
-        div.style.backgroundColor = 'tan'; 
-        div.style.color = 'black';           
+        div.style.backgroundColor = 'tan';
+        div.style.color = 'black';
         div.style.fontStyle = 'italic';
-    } else if(type === "special") {
-        div.style.backgroundColor = 'purple'; 
-        div.style.color = 'white';           
+    } else if (type === "special") {
+        div.style.backgroundColor = 'purple';
+        div.style.color = 'white';
         div.style.fontStyle = 'italic';
     }
 

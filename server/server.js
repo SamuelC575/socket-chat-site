@@ -12,58 +12,116 @@ const io = new Server(server, {
 // Serve client files
 app.use(express.static(path.join(__dirname, '../client')));
 
+// ----------------------
+// LOBBY STORAGE
+// ----------------------
+const lobbies = {};
+
+for (let i = 1; i <= 10; i++) {
+    lobbies[i] = {}; // { socketId: username }
+}
+
+// ----------------------
+// SOCKET CONNECTIONS
+// ----------------------
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
 
     let currentLobby = null;
-    let username = `Guest_${socket.id.slice(0, 5)}`; // default username
+    let username = `Guest_${socket.id.slice(0, 5)}`;
 
-    // Global connect announcement
-    io.emit('chat-message', `${username} has connected`);
+    // announce connection (optional global message)
+    io.emit('chat-message', `Server: ${username} connected`);
 
-    // Join lobby
+    // ----------------------
+    // JOIN LOBBY
+    // ----------------------
     socket.on('join-lobby', (lobby) => {
-        if (currentLobby) socket.leave(currentLobby);
+        lobby = String(lobby);
 
-        currentLobby = String(lobby);
+        // leave previous lobby
+        if (currentLobby) {
+            socket.leave(currentLobby);
+            delete lobbies[currentLobby][socket.id];
+        }
+
+        currentLobby = lobby;
         socket.join(currentLobby);
 
-        console.log(`'${username}' joined lobby ${currentLobby}`);
+        // add to lobby
+        lobbies[currentLobby][socket.id] = username;
 
-        // Announce globally
-        io.emit('chat-message', `Server: '${username}' joined lobby ${currentLobby}`);
+        console.log(`${username} joined lobby ${currentLobby}`);
+
+        io.emit('chat-message', `Server: ${username} joined lobby ${currentLobby}`);
+
+        sendLobbyData();
     });
 
-    // Chat messages (only in lobby)
-    socket.on('chat-message', (message, user) => {
+    // ----------------------
+    // CHAT MESSAGE
+    // ----------------------
+    socket.on('chat-message', (message) => {
         if (!currentLobby) return;
 
-        // Broadcast to lobby excluding sender
-        socket.to(currentLobby).emit('chat-message', `${user}: ${message}`);
+        io.to(currentLobby).emit(
+            'chat-message',
+            `${username}: ${message}`
+        );
     });
 
-    // Username change
+    // ----------------------
+    // CHANGE USERNAME
+    // ----------------------
     socket.on('change-username', (newUsername) => {
         const oldUsername = username;
         username = newUsername;
 
-        // Notify everyone else globally
-        socket.broadcast.emit('chat-message', `Server: '${oldUsername}' changed their name to '${username}'`);
+        // update lobby record
+        if (currentLobby) {
+            lobbies[currentLobby][socket.id] = username;
+        }
+
+        socket.broadcast.emit(
+            'chat-message',
+            `Server: ${oldUsername} changed name to ${username}`
+        );
+
+        sendLobbyData();
     });
 
-    socket.on('recommend', (data) => {
-        console.log()
-        console.log(`${data.username}: ${data.feedback}`);
-        console.log()
-    });
-
-    // Disconnect
+    // ----------------------
+    // DISCONNECT
+    // ----------------------
     socket.on('disconnect', () => {
-        io.emit('chat-message', `${username} has disconnected`);
+        if (currentLobby) {
+            delete lobbies[currentLobby][socket.id];
+        }
+
+        io.emit('chat-message', `Server: ${username} disconnected`);
         console.log('User disconnected:', socket.id);
+
+        sendLobbyData();
     });
+
+    // ----------------------
+    // SEND ALL LOBBY DATA
+    // ----------------------
+    function sendLobbyData() {
+        const formatted = {};
+
+        for (let i = 1; i <= 10; i++) {
+            formatted[i] = Object.values(lobbies[i]);
+        }
+
+        io.emit('lobby-data', formatted);
+    }
 });
 
-// Start server
+// ----------------------
+// START SERVER
+// ----------------------
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
