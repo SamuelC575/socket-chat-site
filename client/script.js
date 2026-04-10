@@ -26,8 +26,16 @@ socket.on('connect', () => {
 });
 
 const listButton = document.getElementById('list-open');
-listButton.addEventListener('click', openList);
+const userList = document.getElementById('user-list');
 
+listButton.addEventListener('mouseenter', () => {
+  userList.classList.add('show');
+  console.log('showing')
+});
+
+listButton.addEventListener('mouseleave', () => {
+  userList.classList.remove('show');
+});
 
 
 // =======================
@@ -77,9 +85,13 @@ function handleChangeName(event) {
     // fix name rule BEFORE assigning
     if (newName.toLowerCase() === 'ben') {
         newName = 'idiot';
+    } else if (newName.length > 16) {
+        displayMessage(`Name must be 16 characters or less`,'system');
+        userInput.value = "";
+
+        return;
     }
 
-    const oldName = username;
     username = newName;
 
     displayMessage(`You changed your username to '${newName}'`, 'system');
@@ -109,9 +121,9 @@ function handleLobbyChange(event) {
         lobbyVisual.textContent = lobbynumber;
 
         container.innerHTML = "";
-        displayMessage(`Joined lobby ${lobby}`, 'system');
+        displayMessage(`Joined Lobby ${lobby}`, 'system');
     } else {
-        displayMessage("Invalid lobby (1–10 only)", 'system');
+        displayMessage("Invalid Lobby (1–10 only)", 'system');
     }
 
     lobbyInput.value = "";
@@ -135,6 +147,13 @@ socket.on('chat-message', (message) => {
 // (OPTIONAL) LOBBY DATA FROM SERVER
 // =======================
 socket.on('lobby-data', (data) => {
+    const container = document.getElementById("user-list");
+
+    container.innerHTML = Object.entries(data)
+    .map(([lobby, players]) => {
+        return `<div>Lobby ${lobby}: ${players.join(", ")}</div>`;
+    })
+    .join("");
     console.log("Lobby update:", data);
 });
 

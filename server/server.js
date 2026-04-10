@@ -1,3 +1,8 @@
+// cd /Users/samchoi/Documents/HTML\ Projects/Socket.io-Chat
+// git add .
+// git commit -m ""
+// git push origin main
+
 const express = require('express');
 const path = require('path');
 const http = require('http');
@@ -64,7 +69,9 @@ io.on('connection', (socket) => {
     socket.on('chat-message', (message) => {
         if (!currentLobby) return;
 
-        io.to(currentLobby).emit(
+        console.log(currentLobby)
+
+        .to(currentLobby).emit(
             'chat-message',
             `${username}: ${message}`
         );
@@ -84,7 +91,7 @@ io.on('connection', (socket) => {
 
         socket.broadcast.emit(
             'chat-message',
-            `Server: ${oldUsername} changed name to ${username}`
+            `Server: '${oldUsername}' changed their name to '${username}'`
         );
 
         sendLobbyData();
