@@ -18,6 +18,7 @@ input {
     width: 100vw;
     height: 12vh;
     border-top: 10px solid black;
+    border-bottom: 10px solid black;
     font-size: 10vh;
     display: flex;
     align-items: center;

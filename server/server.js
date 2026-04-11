@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
     socket.on('recommend', review => {
         console.log();
         console.log(review);
-        console.log;
+        console.log();
     })
 
     // Disconnect
