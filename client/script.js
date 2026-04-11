@@ -30,7 +30,6 @@ const userList = document.getElementById('user-list');
 
 listButton.addEventListener('mouseenter', () => {
   userList.classList.add('show');
-  console.log('showing')
 });
 
 listButton.addEventListener('mouseleave', () => {
