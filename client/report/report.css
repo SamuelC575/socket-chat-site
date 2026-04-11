@@ -4,11 +4,11 @@
 }
 
 input {
-    font-size: 4vw;
+    font-size: 6vh;
     width: 100vw;
     height: 10vh;
     border: 5px solid black;
-    padding: 1vw;
+    padding-left: 1.5vw;
 }
 
 #return {
@@ -29,8 +29,7 @@ input {
 }
 
 input::placeholder {
-    padding: 1vw;
-    font-size: 4vw;
+    font-size: 5.5vh;
 }
 
 h1 {
