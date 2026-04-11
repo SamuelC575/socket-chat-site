@@ -64,9 +64,7 @@ io.on('connection', (socket) => {
     socket.on('chat-message', (message) => {
         if (!currentLobby) return;
 
-        console.log(currentLobby)
-
-        .to(currentLobby).emit(
+        socket.to(currentLobby).emit(
             'chat-message',
             `${username}: ${message}`
         );
