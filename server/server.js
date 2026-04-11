@@ -12,18 +12,14 @@ const io = new Server(server, {
 // Serve client files
 app.use(express.static(path.join(__dirname, '../client')));
 
-// ----------------------
-// LOBBY STORAGE
-// ----------------------
+// Lobby Storage
 const lobbies = {};
 
 for (let i = 1; i <= 10; i++) {
     lobbies[i] = {}; // { socketId: username }
 }
 
-// ----------------------
-// SOCKET CONNECTIONS
-// ----------------------
+// Socket Connect
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
 
@@ -33,9 +29,7 @@ io.on('connection', (socket) => {
     // announce connection (optional global message)
     io.emit('chat-message', `Server: ${username} connected`);
 
-    // ----------------------
-    // JOIN LOBBY
-    // ----------------------
+    // Join Lobby
     socket.on('join-lobby', (lobby) => {
         lobby = String(lobby);
 
@@ -58,9 +52,7 @@ io.on('connection', (socket) => {
         sendLobbyData();
     });
 
-    // ----------------------
-    // CHAT MESSAGE
-    // ----------------------
+    // Chat Message
     socket.on('chat-message', (message) => {
         if (!currentLobby) return;
 
@@ -70,9 +62,7 @@ io.on('connection', (socket) => {
         );
     });
 
-    // ----------------------
-    // CHANGE USERNAME
-    // ----------------------
+    // Change Username
     socket.on('change-username', (newUsername) => {
         const oldUsername = username;
         username = newUsername;
@@ -90,9 +80,14 @@ io.on('connection', (socket) => {
         sendLobbyData();
     });
 
-    // ----------------------
-    // DISCONNECT
-    // ----------------------
+    // Recommend
+    socket.on('recommend', review => {
+        console.log();
+        console.log(review);
+        console.log;
+    })
+
+    // Disconnect
     socket.on('disconnect', () => {
         if (currentLobby) {
             delete lobbies[currentLobby][socket.id];
@@ -104,9 +99,7 @@ io.on('connection', (socket) => {
         sendLobbyData();
     });
 
-    // ----------------------
-    // SEND ALL LOBBY DATA
-    // ----------------------
+    // Player List
     function sendLobbyData() {
         const formatted = {};
 

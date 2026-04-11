@@ -14,6 +14,7 @@ const socket = io();
 
 let lobbynumber = 1;
 lobbyVisual.textContent = lobbynumber;
+let loading;
 
 // =======================
 // CONNECT
@@ -24,6 +25,12 @@ socket.on('connect', () => {
 
     socket.emit('join-lobby', lobby);
 });
+
+if (!loading) {
+    displayMessage(`Loading. Refresh if Interface isn't working`, 'special');
+    loading = 'filler';
+
+}
 
 const listButton = document.getElementById('list-open');
 const userList = document.getElementById('user-list');

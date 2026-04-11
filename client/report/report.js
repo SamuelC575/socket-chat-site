@@ -13,7 +13,8 @@ submitStatus.addEventListener('click', function() {
     }
 
     // Emit data as an object
-    socket.emit('recommend', { feedback: feedBack.value, username: username.value });
+    const review = `${username.value}: ${feedback.value}`
+    socket.emit('recommend', review);
 
     // Clear inputs
     feedBack.value = "";
