@@ -9,59 +9,66 @@
     z-index: 1
 }
 
-.no-hover-button {
-    width: 2vw;
-    height: 5vh;
+#return {
     text-decoration: none;
-    border: 0.4vw solid black;
     position: absolute;
-    top: 1vh;
-    left: 0.7vw;
+    width: 100vw;
+    height: 10vh;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-50%,0%);
     display: flex;
-    align-items: center;
     justify-content: center;
-    border-radius: 30%;
+    align-items: center;
+    font-size: 7.5vh;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 1vh solid rgb(255, 255, 255)
 }
 
+div {
+    font-size: 4vh;
+}
+
+#info {
+    position: absolute;
+    left: 4vw;
+    top: 1.5vh;
+}
+
+#feedback {
+    position: absolute;
+    left: 4vw;
+    top: 8vh;
+}
+
+#update-info {
+    position: absolute;
+    left: 4vw;
+    top: 14.5vh;
+}
+
+#question-info {
+    position: absolute;
+    left: 4vw;
+    top: 21vh;
+}
+
+#lobby-number-info {
+    position: absolute;
+    right: 4vw;
+    top: 1.5vh;
+}
+
+#list-open-info {
+    position: absolute;
+    right: 4vw;
+    top: 8vh;
+}
 
 #question {
     position: absolute;
     transform: translate(0,19.5vh);
-}
-
-#user-list {
-    width: 90vw;
-    height: 70vh;
-
-    background: black;
-
-    color: green;
-
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,0);
-    z-index: 2;
-    border: 2vh solid black;
-    border-radius: 5%;
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    position: absolute;
-
-}
-
-#user-list.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-
-#user-list div {
-    font-size: 5vh;
-    margin-left: 0.5vw;
 }
 
 #list-open {
@@ -97,41 +104,7 @@
     top: 14vh;
 }
 
-#message-container {
-    width: 90vw;
-    height: 70vh;
-    border: 2vh solid black;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,0%);
-    border-radius: 5%
-}
 
-
-[id*=input] {
-    width: 50vw;
-    height: 8vh;
-    position: absolute;
-    border: 2vh solid black;
-    font-size: 50px;
-    left: 65vw;
-    transform: translate(-100%,0%);
-    border-radius: 2.5%;
-    background: white;
-}
-
-.chat-input, .user-input {
-    position: fixed;
-    top: 73vh;
-    left: 10vw;
-    padding: 2vh;
-}
-
-[id*=label] {
-    font-size: 7vh;
-    position: absolute;
-    left: -7vw;
-}
 
 [id*=button] {
     width: 15vw;
@@ -149,12 +122,7 @@
 
 }
 
-[id*=button]:hover, .button:hover {
-    background: peachpuff;
-    border-color: gray;
-    transition: 200ms ease-out;
-    cursor: pointer;
-}
+
 
 #lobby-input {
     border-radius: 10%;
@@ -255,12 +223,6 @@
     color: #ffffff;
     background: #ff4d8d;   
     border-color: #cc2f6e; 
-}
-
-.black-green {
-    color: green;
-    background: black;
-    border-color: rgb(31, 30, 30);
 }
 
 body {

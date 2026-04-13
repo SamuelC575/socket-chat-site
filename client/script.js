@@ -35,12 +35,22 @@ if (!loading) {
 const listButton = document.getElementById('list-open');
 const userList = document.getElementById('user-list');
 
+let showList;
+if (!showList) {
+    showList = false
+}
+listButton.addEventListener('click', () => {
+    showList = !showList
+})
+
 listButton.addEventListener('mouseenter', () => {
-  userList.classList.add('show');
+    userList.classList.add('show');
 });
 
 listButton.addEventListener('mouseleave', () => {
-  userList.classList.remove('show');
+    if (!showList) {
+        userList.classList.remove('show');
+    }
 });
 
 
@@ -52,15 +62,13 @@ function sendMessage() {
     if (!message) return;
 
     // Easter egg
-    if (message === "LibleGul") {
-        displayMessage('!SUDO_>TYPE-"LIBLEGUL"-W/-THE-LAST-3-LETTERS-IN-THE-FRONT_<SUDO-CLOSE$');
-        messageInput.value = "!SUDO_>UR-STUPID";
+    if (message === "gullible") {
+        displayMessage('Look Up! The roof says "gullible!"');
+        messageInput.value = "im stupid!";
 
         socket.emit('chat-message', 'You know what? I think im gay..');
 
-        userInput.value = "idiot";
-        handleChangeName();
-
+        userInput.value = "Einstein";
         return;
     }
 
