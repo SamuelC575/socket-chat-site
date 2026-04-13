@@ -67,10 +67,10 @@ div {
 }
 
 #question {
+    width: 2.1vw;
     position: absolute;
-    transform: translate(0,19.5vh);
+    transform: translate(-0.1vw,19.5vh);
 }
-
 #list-open {
     position: absolute;
     top: 7.5vh;
@@ -88,6 +88,7 @@ div {
 }
 
 #lobby-number {
+    font-size: 5vh;
     width: 2vw;
     height: 5vh;
 }
@@ -215,6 +216,12 @@ div {
 
 .black {
     color: white;
+    background: black;
+    border-color: rgb(31, 30, 30);
+}
+
+.black-green {
+    color: rgb(57, 255, 20);
     background: black;
     border-color: rgb(31, 30, 30);
 }

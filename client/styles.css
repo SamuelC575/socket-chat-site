@@ -25,17 +25,14 @@
 
 
 #question {
+    width: 2.1vw;
     position: absolute;
-    transform: translate(0,19.5vh);
+    transform: translate(-0.1vw,19.5vh);
 }
 
 #user-list {
     width: 90vw;
     height: 70vh;
-
-    background: black;
-
-    color: green;
 
     position: absolute;
     left: 50%;
@@ -258,7 +255,7 @@
 }
 
 .black-green {
-    color: green;
+    color: rgb(57, 255, 20);
     background: black;
     border-color: rgb(31, 30, 30);
 }
