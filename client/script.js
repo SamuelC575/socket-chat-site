@@ -27,11 +27,57 @@ socket.on('connect', () => {
 });
 
 if (!loading) {
-    displayMessage(`Loading. Refresh if Interface isn't working`, 'special');
+    displayMessage(`Loading, Refresh if Interface isn't working. Send '/guide' for a guide`, 'special');
     loading = 'filler';
 
 }
 
+// Change Theme
+document.getElementById('beach-change').onclick = () => {
+    setTheme('theme-beach');
+}
+
+document.getElementById('dark-change').onclick = () => {
+    setTheme('theme-dark');
+}
+
+document.getElementById('sunset-change').onclick = () => {
+    setTheme('theme-sunset');
+}
+
+document.getElementById('neon-change').onclick = () => {
+    setTheme('theme-neon');
+}
+
+document.getElementById('classic-change').onclick = () => {
+    setTheme('theme-classic');
+}
+
+const THEMES = ['theme-beach','theme-dark','theme-sunset','theme-neon','theme-classic']
+function setTheme(newTheme) {
+    document.body.classList.remove(...THEMES);
+
+    document.body.classList.add(newTheme)
+}
+
+// Show Settings Panel
+
+const settingsButton = document.getElementById('settings-open');
+const settingsPanel = document.getElementById('settings-panel');
+
+let showPanel = false;
+
+settingsButton.addEventListener('click', () => {
+    showPanel = !showPanel;
+
+    if (showPanel) {
+        settingsPanel.classList.add('show');
+    } else {
+        settingsPanel.classList.remove('show');
+    }
+});
+
+// Show Player List
 const listButton = document.getElementById('list-open');
 const userList = document.getElementById('user-list');
 
@@ -54,6 +100,8 @@ listButton.addEventListener('mouseleave', () => {
 });
 
 
+
+
 // =======================
 // SEND MESSAGE
 // =======================
@@ -69,6 +117,9 @@ function sendMessage() {
         socket.emit('chat-message', 'You know what? I think im gay..');
 
         userInput.value = "Einstein";
+        return;
+    } else if (message === '/guide') {
+        displayMessage('Click the Question Mark Button on the Left Side','special');
         return;
     }
 

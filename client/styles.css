@@ -118,7 +118,7 @@
 }
 
 .chat-input, .user-input {
-    position: fixed;
+    position: absolute;
     top: 73vh;
     left: 10vw;
     padding: 2vh;
@@ -146,7 +146,7 @@
 
 }
 
-[id*=button]:hover, .button:hover {
+[id*=button]:hover, .button:hover, [id*='change']:hover {
     background: peachpuff;
     border-color: gray;
     transition: 200ms ease-out;
@@ -260,15 +260,46 @@
     border-color: rgb(31, 30, 30);
 }
 
-body {
-    height: 100vh;
-    margin: 0;
+/* reusable theme visuals */
+[class*=theme] {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-    background: linear-gradient(to bottom right, skyblue,rgb(1, 155, 155),rgb(245, 196, 0));
+/* animation */
+.animated-gradient {
     background-size: 600% 600%;
-
     animation: gradientMove 8s ease-in infinite;
 }
+
+.theme-beach {
+    background-image: linear-gradient(to bottom right, skyblue, rgb(1, 155, 155), rgb(245, 196, 0));
+    color: white;
+}
+
+.theme-dark {
+    background-image: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+    color: white;
+
+}
+
+.theme-sunset {
+    background-image: linear-gradient(to bottom right, #ff7e5f, #fff700,#e84820);
+    color: white;
+}
+
+.theme-neon {
+    background-image: linear-gradient(to bottom right, #00ff87, #60efff);
+    color: white;
+}
+
+.theme-classic {
+    background-image: linear-gradient(to bottom right,black,white);
+    color: white;
+}
+
 
 @keyframes gradientMove {
     0% {
@@ -280,4 +311,70 @@ body {
     100% {
         background-position: 0% 50%;
     }
+}
+
+
+#settings-panel {
+    width: 90vw;
+    height: 70vh;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 2;
+    background: #1f2937;
+    border: 2vh solid black;
+    border-radius: 5%;
+    color: #f9fafb;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    position: absolute;
+}
+
+#settings-panel.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#settings-open {
+    position: absolute;
+    top: 14vh;
+    left: 96.6vw;
+    width: 2.8vw;
+    height: 6.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#theme {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    font-size: 7vh;
+}
+
+.theme-option {
+    transform: translate(0.5vw,12vh);
+    width: 78vw;
+    border: 0.5vh solid white;
+    color: white;
+    border-radius: 1.5vh;
+    padding-left: 1vh;
+    z-index: 10;
+}
+
+[id*='change'] {
+    font-size: 5vh;
+    width: 10vw;
+    position: absolute;
+    bottom: -0.7vh;
+    right: -10vw;
+    border-radius: 1.5vh;
+    border: 0.5vh solid white;
+    z-index: 11;
 }

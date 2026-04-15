@@ -6,7 +6,7 @@
     <title>RPV Connect</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body class="theme-beach animated-gradient">
     <div id="message-container"></div>
     <form id="form">
         <div class="chat-input">
@@ -30,6 +30,27 @@
     
     <button type="button" id="list-open" class="black-green button">ツ</button>
     <div id="user-list" class="black-green">_</div>
+
+    <button type="button" id="settings-open" class="black-green button">⛭</button>
+    <div id="settings-panel" class="black">
+        <div id="theme">Theme Beta*</div>
+        <div class="theme-option theme-beach" data-theme="theme-classic">
+            Beach
+            <button type="button" id="beach-change" class="animated-gradient theme-beach">Change</button>
+        </div>
+        <div class="theme-option theme-dark" data-theme="theme-dark">Dark
+            <button type="button" id="dark-change" class="animated-gradient theme-dark">Change</button>
+        </div>
+        <div class="theme-option theme-sunset" data-theme="theme-sunset">Sunset
+            <button type="button" id="sunset-change" class="animated-gradient theme-sunset">Change</button>
+        </div>
+        <div class="theme-option theme-neon" data-theme="theme-neon">Neon
+            <button type="button" id="neon-change" class="animated-gradient theme-neon">Change</button>
+        </div>
+        <div class="theme-option theme-classic" data-theme="theme-classic">Classic
+            <button type="button" id="classic-change" class="animated-gradient theme-classic">Change</button>
+        </div>
+    </div>
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script type="module" src="./script.js"></script>

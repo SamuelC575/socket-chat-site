@@ -105,7 +105,137 @@ div {
     top: 14vh;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 5vh;
+    z-index: 1
+}
+
+.no-hover-button {
+    width: 2vw;
+    height: 5vh;
+    text-decoration: none;
+    border: 0.4vw solid black;
+    position: absolute;
+    top: 1vh;
+    left: 0.7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30%;
+}
+
+
+#question {
+    width: 2.1vw;
+    position: absolute;
+    transform: translate(-0.1vw,19.5vh);
+}
+
+#user-list {
+    width: 90vw;
+    height: 70vh;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 2;
+    border: 2vh solid black;
+    border-radius: 5%;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    position: absolute;
+
+}
+
+#user-list.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+#user-list div {
+    font-size: 5vh;
+    margin-left: 0.5vw;
+}
+
+#list-open {
+    position: absolute;
+    top: 7.5vh;
+    left: 96.6vw;
+    width: 2.8vw;
+    height: 6.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    position: absolute;
+    transform: translate(96vw,0%);
+}
+
+#lobby-number {
+    width: 2vw;
+    height: 5vh;
+}
+
+
+
+#report {
+    position: absolute;
+    top:7.5vh;
+}
+
+#update {
+    position: absolute;
+    top: 14vh;
+}
+
+#message-container {
+    width: 90vw;
+    height: 70vh;
+    border: 2vh solid black;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0%);
+    border-radius: 5%
+}
+
+
+[id*=input] {
+    width: 50vw;
+    height: 8vh;
+    position: absolute;
+    border: 2vh solid black;
+    font-size: 50px;
+    left: 65vw;
+    transform: translate(-100%,0%);
+    border-radius: 2.5%;
+    background: white;
+}
+
+.chat-input, .user-input {
+    position: absolute;
+    top: 73vh;
+    left: 10vw;
+    padding: 2vh;
+}
+
+[id*=label] {
+    font-size: 7vh;
+    position: absolute;
+    left: -7vw;
+}
 
 [id*=button] {
     width: 15vw;
@@ -122,7 +252,6 @@ div {
     transition: 200ms ease-out;
 
 }
-
 
 
 #lobby-input {
@@ -220,16 +349,16 @@ div {
     border-color: rgb(31, 30, 30);
 }
 
-.black-green {
-    color: rgb(57, 255, 20);
-    background: black;
-    border-color: rgb(31, 30, 30);
-}
-
 .pink {
     color: #ffffff;
     background: #ff4d8d;   
     border-color: #cc2f6e; 
+}
+
+.black-green {
+    color: rgb(57, 255, 20);
+    background: black;
+    border-color: rgb(31, 30, 30);
 }
 
 body {
