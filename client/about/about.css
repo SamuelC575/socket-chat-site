@@ -4,7 +4,7 @@
 }
 
 body {
-    height: 120vh;
+    height: 150vh;
     margin: 0;
 
     background: linear-gradient(black,red);
@@ -30,7 +30,7 @@ body {
     color: white;
     position: absolute;
     left: 1vw;
-    top:7vh;
+    top:10vh;
     width: 100vw;
     font-size: 3.5vh;
 }
@@ -61,8 +61,7 @@ body {
 
 .center-bottom {
     position: absolute;
-    left: 50;
-    bottom: -30%;
+    top: 150vh;
     transform: translate(0%,0);
 }
 
