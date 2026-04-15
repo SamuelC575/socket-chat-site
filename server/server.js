@@ -21,7 +21,7 @@ for (let i = 1; i <= 10; i++) {
 
 // Socket Connect
 io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
+    // console.log('User connected:', socket.id);
 
     let currentLobby = null;
     let username = `Guest_${socket.id.slice(0, 5)}`;
@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
         // add to lobby
         lobbies[currentLobby][socket.id] = username;
 
-        console.log(`${username} joined lobby ${currentLobby}`);
+        // console.log(`${username} joined lobby ${currentLobby}`);
 
         io.emit('chat-message', `Server: ${username} joined lobby ${currentLobby}`);
 
@@ -94,7 +94,7 @@ io.on('connection', (socket) => {
         }
 
         io.emit('chat-message', `Server: ${username} disconnected`);
-        console.log('User disconnected:', socket.id);
+        // console.log('User disconnected:', socket.id);
 
         sendLobbyData();
     });
@@ -116,5 +116,5 @@ io.on('connection', (socket) => {
 // ----------------------
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    // console.log(`Server running on port ${PORT}`);
 });
