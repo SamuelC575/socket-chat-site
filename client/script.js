@@ -135,14 +135,18 @@ async function sendMessage() {
         return;
     } else if (FIRSTFOUR === 'stfu') {
         curse = true;
+        socket.emit('log',`${username}: ${message}`)
         message = 'I love you!'
     } else if (FIRSTSIX.toLowerCase() === 'nigger') {
         curse = true;
+        socket.emit('log',`${username}: ${message}`)
         message = "I'm extremely unfunny and deserve to die"
     } else if (FIRSTFIVE.toLowerCase() === 'nigga') {
         curse = true;
+        socket.emit('log',`${username}: ${message}`)
         message = "I'm gay and forever will be lonely"
     } else if (FIRSTFOUR.toLowerCase() === 'fuck') {
+        socket.emit('log',`${username}: ${message}`)
         message = "I like boys!"
         curse = true;
     }
@@ -154,7 +158,6 @@ async function sendMessage() {
     }
 
     if (curse === true) {
-        socket.emit('log',`${username}: ${message}`)
         socket.emit('chat-message', message);
         displayMessage("Please don't curse. Your precious life isn't worth wasting over malicious language. Please turn to God 🙏")
         await sleep(7000);
