@@ -7,6 +7,9 @@ const lobbyButton = document.getElementById('lobby-button');
 const container = document.getElementById('message-container');
 const lobbyVisual = document.getElementById('lobby-number');
 
+let curse;
+let quit;
+
 let username = 'Guest';
 let lobby = '1';
 
@@ -100,14 +103,23 @@ listButton.addEventListener('mouseleave', () => {
 });
 
 
+// Sleep
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 // =======================
 // SEND MESSAGE
 // =======================
-function sendMessage() {
-    const message = messageInput.value.trim();
+async function sendMessage() {
+    let message = messageInput.value.trim();
     if (!message) return;
+
+    const FIRSTSIX = message.substring(0,6)
+    const FIRSTFIVE = message.substring(0,6)
+    const FIRSTFOUR = message.substring(0,6)
+
 
     // Easter egg
     if (message === "gullible") {
@@ -120,6 +132,32 @@ function sendMessage() {
         return;
     } else if (message === '/guide') {
         displayMessage('Click the Question Mark Button on the Left Side','special');
+        return;
+    } else if (FIRSTFOUR === 'stfu') {
+        curse = true;
+        message = 'I love you!'
+    } else if (FIRSTSIX.toLowerCase() === 'nigger') {
+        curse = true;
+        message = "I'm extremely unfunny and deserve to die"
+    } else if (FIRSTFIVE.toLowerCase() === 'nigga') {
+        curse = true;
+        message = "I'm gay and forever will be lonely"
+    } else if (FIRSTFOUR.toLowerCase() === 'fuck') {
+        message = "I like boys!"
+        curse = true;
+    }
+
+
+    if (curse === true) {
+        socket.emit('chat-message', message);
+        displayMessage("Please don't curse. Your precious life isn't worth wasting over malicious language. Please turn to God 🙏")
+        await sleep(5000);
+        window.location.href = "https://www.youtube.com/watch?v=9RKEuV7-uKA&pp=ygUTaG93IHRvIG1ha2UgZnJpZW5kcw%3D%3D";
+        quit = true;
+        return;
+    }
+
+    if (quit === true) {
         return;
     }
 
@@ -242,3 +280,4 @@ function displayMessage(message, type = "chat") {
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
 }
+

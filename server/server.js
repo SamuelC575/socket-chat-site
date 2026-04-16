@@ -87,6 +87,10 @@ io.on('connection', (socket) => {
         console.log();
     })
 
+    socket.on('server', (serverMessage) => {
+        io.emit('chat-message',serverMessage)
+    })
+
     // Disconnect
     socket.on('disconnect', () => {
         if (currentLobby) {
