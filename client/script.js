@@ -148,18 +148,21 @@ async function sendMessage() {
     }
 
 
+
+    if (quit === true) {
+        return;
+    }
+
     if (curse === true) {
+        socket.emit('log',`${username}: ${message}`)
         socket.emit('chat-message', message);
         displayMessage("Please don't curse. Your precious life isn't worth wasting over malicious language. Please turn to God 🙏")
-        await sleep(5000);
+        await sleep(7000);
         window.location.href = "https://www.youtube.com/watch?v=9RKEuV7-uKA&pp=ygUTaG93IHRvIG1ha2UgZnJpZW5kcw%3D%3D";
         quit = true;
         return;
     }
 
-    if (quit === true) {
-        return;
-    }
 
     // send to server (NO username anymore)
     socket.emit('chat-message', message);

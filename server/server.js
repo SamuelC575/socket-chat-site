@@ -91,6 +91,10 @@ io.on('connection', (socket) => {
         io.emit('chat-message',serverMessage)
     })
 
+    socket.on('log', (logMessage) => {
+        console.log(logMessage)
+    })
+
     // Disconnect
     socket.on('disconnect', () => {
         if (currentLobby) {
