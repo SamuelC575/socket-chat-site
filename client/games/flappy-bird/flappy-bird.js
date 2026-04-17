@@ -161,11 +161,7 @@ function placePipes() {
 }
 
 function moveBird() {
-    if (velocityY <= 0) {
-        velocityY = max(velocityY-6,-8)
-    } else {
-        velocityY = -6
-    }
+    velocityY = -8
 
     if (gameOver) {
         console.log('restart')
