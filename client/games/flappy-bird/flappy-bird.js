@@ -161,8 +161,12 @@ function placePipes() {
 }
 
 function moveBird() {
+    if (velocityY <= 0) {
+        velocityY = min(velocityY-6,-8)
+    } else {
     velocityY = -6
-
+    }
+    
     if (gameOver) {
         console.log('restart')
         bird.y = birdY;
