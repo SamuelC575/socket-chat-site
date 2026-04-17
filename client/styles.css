@@ -378,3 +378,9 @@
     border: 0.5vh solid white;
     z-index: 11;
 }
+
+#games {
+    position: absolute;
+    top: 27vh;
+    font-size: 2.5vw;
+}

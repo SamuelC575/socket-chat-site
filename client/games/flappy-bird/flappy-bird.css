@@ -1,0 +1,46 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(to bottom right, skyblue, green);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+a {
+    text-decoration: none;
+}
+
+#logo {
+    position: absolute;
+
+    top: -5vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30vw;
+}
+
+#board {
+    background-image: url("./Images/flappybirdbg.png");
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-60%);
+}
+
+#border {
+    width: 384px;
+    height: 619px;
+    border: 1vh solid black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 0.5vh;
+}
+
+body {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;     /* old IE/Edge */
+    user-select: none;         /* standard */
+}

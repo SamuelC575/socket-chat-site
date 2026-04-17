@@ -1,3 +1,5 @@
+document.addEventListener("contextmenu", e => e.preventDefault());
+
 const sendButton = document.getElementById('send-button');
 const messageInput = document.getElementById('message-input');
 const userInput = document.getElementById('user-input');
