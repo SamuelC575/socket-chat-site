@@ -29,9 +29,9 @@ let pipeY = 0;
 let topPipeImg;
 let bottomPipeImg;
 
-let velocityX = -5;
+let velocityX = -7;
 let velocityY = 0;
-let gravity = 0.5;
+let gravity = 0.6;
 
 let gameOver = false;
 let score = 0;
@@ -56,7 +56,7 @@ window.onload = function() {
 
 
     requestAnimationFrame(update);
-    setInterval(placePipes, 1300);
+    setInterval(placePipes, 1500);
 
     document.addEventListener('pointerdown',moveBird);
     document.addEventListener("keydown", function(e) {
@@ -161,7 +161,7 @@ function placePipes() {
 }
 
 function moveBird() {
-    velocityY = -8
+    velocityY = -6
 
     if (gameOver) {
         console.log('restart')
