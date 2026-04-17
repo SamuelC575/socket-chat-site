@@ -29,7 +29,7 @@ let pipeY = 0;
 let topPipeImg;
 let bottomPipeImg;
 
-let velocityX = -4;
+let velocityX = -5;
 let velocityY = 0;
 let gravity = 0.5;
 
