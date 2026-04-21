@@ -9,6 +9,8 @@ const io = new Server(server, {
     cors: { origin: "*" }
 });
 
+let idUser = []
+
 // Serve client files
 app.use(express.static(path.join(__dirname, '../client')));
 
@@ -25,6 +27,8 @@ io.on('connection', (socket) => {
 
     let currentLobby = null;
     let username = `Guest_${socket.id.slice(0, 5)}`;
+
+    idUser.push([socket.id, username]);
 
     // announce connection (optional global message)
     io.emit('chat-message', `Server: ${username} connected`);
@@ -77,6 +81,12 @@ io.on('connection', (socket) => {
             `Server: '${oldUsername}' changed their name to '${username}'`
         );
 
+        for (let i = 0; i < idUser.length; i++) {
+            if (idUser[i][0] === socket.id) {
+                idUser[i][1] = newUsername;
+                // console.log(idUser);
+            }
+        }
         sendLobbyData();
     });
 
@@ -100,12 +110,46 @@ io.on('connection', (socket) => {
         if (currentLobby) {
             delete lobbies[currentLobby][socket.id];
         }
+    
+        idUser = idUser.filter(([id]) => id !== socket.id);
 
         io.emit('chat-message', `Server: ${username} disconnected`);
         // console.log('User disconnected:', socket.id);
 
         sendLobbyData();
     });
+
+    socket.on('kick', (kickUser,code, codeUser) => {
+        let codeId = findSocketByUser(codeUser);
+
+        if (!codeId) {
+            return;
+        }
+        console.log(codeId)
+        if (code == "1_25_1" && codeId.includes('z')) {
+            console.log(kickUser,code)
+
+            let socketId = findSocketByUser(kickUser);
+
+            io.to(socketId).emit('kick')
+        }
+    })
+
+    function findSocketByUser(username) {
+        for (const [id, user] of idUser) {
+            if (user === username) {
+                return id;
+            }
+        }
+    }
+
+    function findSocketById(ID) {
+        for (const [id, user] of idUser) {
+            if (id === ID) {
+                return user;
+            }
+        }
+    }
 
     // Player List
     function sendLobbyData() {

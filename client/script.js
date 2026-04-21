@@ -1,4 +1,7 @@
-document.addEventListener("contextmenu", e => e.preventDefault());
+// document.addEventListener("contextmenu", e => e.preventDefault());
+
+
+
 
 const sendButton = document.getElementById('send-button');
 const messageInput = document.getElementById('message-input');
@@ -11,6 +14,7 @@ const lobbyVisual = document.getElementById('lobby-number');
 
 let curse;
 let quit;
+let nameTaken;
 
 let username = 'Guest';
 let lobby = '1';
@@ -30,6 +34,11 @@ socket.on('connect', () => {
 
     socket.emit('join-lobby', lobby);
 });
+
+socket.on('kick', () => {
+    socket.emit('server',`User: ${username} has been kicked!`)
+    socket.disconnect()
+})
 
 if (!loading) {
     displayMessage(`Loading, Refresh if Interface isn't working. Send '/guide' for a guide`, 'special');
@@ -119,8 +128,8 @@ async function sendMessage() {
     if (!message) return;
 
     const FIRSTSIX = message.substring(0,6)
-    const FIRSTFIVE = message.substring(0,6)
-    const FIRSTFOUR = message.substring(0,6)
+    const FIRSTFIVE = message.substring(0,5)
+    const FIRSTFOUR = message.substring(0,4)
 
 
     // Easter egg
@@ -132,7 +141,18 @@ async function sendMessage() {
 
         userInput.value = "Einstein";
         return;
-    } else if (message === '/guide') {
+    }
+
+    if (message.startsWith("!kick: ")) {
+        let parts = message.substring(7).split(" ");
+        let code = parts[0];
+        let kickUser = parts[1];
+
+        socket.emit('kick', kickUser, code, username);
+        return;
+    }
+
+    if (message === '/guide') {
         displayMessage('Click the Question Mark Button on the Left Side','special');
         return;
     } else if (FIRSTFOUR === 'stfu') {
@@ -193,16 +213,30 @@ function handleChangeName(event) {
     let newName = userInput.value.trim();
     if (!newName) return;
 
-    // fix name rule BEFORE assigning
-    if (newName.toLowerCase() === 'ben') {
-        newName = 'idiot';
-    } else if (newName.length > 16) {
-        displayMessage(`Name must be 16 characters or less`,'system');
-        userInput.value = "";
+    let nameTaken = false;
+    for (let i = 1; i <= 10; i++) {
+        if (Object.values(lobbies[i]).includes(newName)) {
+            nameTaken = true;
+            break;
+        }
+    }
 
+    if (nameTaken) {
+        displayMessage(`Username '${newName}' is taken`);
         return;
     }
 
+    if (newName.toLowerCase() === 'ben') {
+        newName = 'idiot';
+    } else if (newName.length > 16) {
+        displayMessage(`Name must be 16 characters or less`, 'system');
+        return;
+    } else if (newName === "You") {
+        displayMessage('Invalid Name', 'system');
+        return;
+    }
+
+    
     username = newName;
 
     displayMessage(`You changed your username to '${newName}'`, 'system');
@@ -249,14 +283,19 @@ lobbyInput.addEventListener('keydown', handleLobbyChange);
 socket.on('chat-message', (message) => {
     if (message.startsWith("Server:")) {
         displayMessage(message, 'system');
+    } else if (message.startsWith("User:")) {
+        displayMessage(message, 'red')
     } else {
         displayMessage(message, 'chat');
     }
 });
 
+
+
 // =======================
 // (OPTIONAL) LOBBY DATA FROM SERVER
 // =======================
+let lobbies;
 socket.on('lobby-data', (data) => {
     const container = document.getElementById("user-list");
 
@@ -265,6 +304,7 @@ socket.on('lobby-data', (data) => {
         return `<div>Lobby ${lobby}: ${players.join(", ")}</div>`;
     })
     .join("");
+    lobbies = data;
     console.log("Lobby update:", data);
 });
 
@@ -283,6 +323,10 @@ function displayMessage(message, type = "chat") {
         div.style.backgroundColor = 'purple';
         div.style.color = 'white';
         div.style.fontStyle = 'italic';
+    } else if (type === "red") {
+        div.style.backgroundColor = 'red';
+        div.style.color = 'white';
+        div.style.fontStyle = 'bold'
     }
 
     container.appendChild(div);
