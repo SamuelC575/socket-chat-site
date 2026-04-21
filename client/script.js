@@ -288,7 +288,7 @@ lobbyInput.addEventListener('keydown', handleLobbyChange);
 socket.on('chat-message', (message) => {
     if (message.startsWith("Server:")) {
         displayMessage(message, 'system');
-    } else if (message.startsWith("User:")) {
+    } else if (message.startsWith("User '")) {
         displayMessage(message, 'red')
     } else {
         displayMessage(message, 'chat');
@@ -331,7 +331,7 @@ function displayMessage(message, type = "chat") {
     } else if (type === "red") {
         div.style.backgroundColor = 'red';
         div.style.color = 'white';
-        div.style.fontStyle = 'bold'
+        div.style.fontStyle = 'bold';
     }
 
     container.appendChild(div);
