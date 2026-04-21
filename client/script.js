@@ -288,7 +288,7 @@ lobbyInput.addEventListener('keydown', handleLobbyChange);
 socket.on('chat-message', (message) => {
     if (message.startsWith("Server:")) {
         displayMessage(message, 'system');
-    } else if (message.startsWith("User '")) {
+    } else if (message.startsWith("User")) {
         displayMessage(message, 'red')
     } else {
         displayMessage(message, 'chat');
