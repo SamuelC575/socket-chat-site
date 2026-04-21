@@ -119,14 +119,11 @@ io.on('connection', (socket) => {
         sendLobbyData();
     });
 
-    socket.on('kick', (kickUser,code, codeUser) => {
-        let codeId = findSocketByUser(codeUser);
-
+    socket.on('kick', (kickUser,code, codeId) => {
         if (!codeId) {
             return;
         }
-        console.log(codeId)
-        if (code == "1_25_1" && codeId.includes('z')) {
+        if (code == "1_25_1" && (codeId.includes('-') || codeId.includes('_'))) {
             console.log(kickUser,code)
 
             let socketId = findSocketByUser(kickUser);

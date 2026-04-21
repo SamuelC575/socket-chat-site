@@ -36,7 +36,7 @@ socket.on('connect', () => {
 });
 
 socket.on('kick', () => {
-    socket.emit('server',`User: ${username} has been kicked!`)
+    socket.emit('server',`User '${username}' has been kicked!`)
     socket.disconnect()
 })
 
@@ -148,7 +148,12 @@ async function sendMessage() {
         let code = parts[0];
         let kickUser = parts[1];
 
-        socket.emit('kick', kickUser, code, username);
+        console.log(kickUser)
+        console.log(code)
+        console.log(socket.id)
+        
+        
+        socket.emit('kick', kickUser, code, socket.id);
         return;
     }
 
@@ -236,7 +241,7 @@ function handleChangeName(event) {
         return;
     }
 
-    
+
     username = newName;
 
     displayMessage(`You changed your username to '${newName}'`, 'system');
