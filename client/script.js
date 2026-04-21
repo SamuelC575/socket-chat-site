@@ -37,13 +37,13 @@ socket.on('connect', () => {
 
 socket.on('kick', () => {
     socket.emit('server',`User '${username}' has been kicked!`)
-    socket.disconnect()
-})
+    setTimeout(() => {
+        socket.disconnect();
+    }, 300);})
 
 if (!loading) {
     displayMessage(`Loading, Refresh if Interface isn't working. Send '/guide' for a guide`, 'special');
     loading = 'filler';
-
 }
 
 // Change Theme
