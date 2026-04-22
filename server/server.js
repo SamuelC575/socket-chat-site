@@ -123,7 +123,7 @@ io.on('connection', (socket) => {
         if (!codeId) {
             return;
         }
-        if (code == "1_25_1" && (codeId.includes('-') || codeId.includes('_'))) {
+        if (code == `1_-${codeId[0]}-_25_-${codeId.at(-1)}-_1`) {
             console.log(kickUser,code)
 
             let socketId = findSocketByUser(kickUser);

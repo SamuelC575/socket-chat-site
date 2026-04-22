@@ -1,4 +1,4 @@
-// document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("contextmenu", e => e.preventDefault());
 
 
 
@@ -12,7 +12,6 @@ const lobbyButton = document.getElementById('lobby-button');
 const container = document.getElementById('message-container');
 const lobbyVisual = document.getElementById('lobby-number');
 
-let curse;
 let quit;
 let nameTaken;
 
@@ -123,14 +122,24 @@ function sleep(ms) {
 // =======================
 // SEND MESSAGE
 // =======================
+const banned = ["stfu", "fuck", "sybau", "shit", "damn", "nigger", "nigga"];
 async function sendMessage() {
+    if (quit === true) {
+        return;
+    }
+
     let message = messageInput.value.trim();
     if (!message) return;
 
-    const FIRSTSIX = message.substring(0,6)
-    const FIRSTFIVE = message.substring(0,5)
-    const FIRSTFOUR = message.substring(0,4)
+    const text = message.toLowerCase();
 
+    if (banned.some(word => text.includes(word))) {
+        displayMessage("Message blocked due to inappropriate language.")
+        await sleep(3000);
+        window.location.href = "https://www.youtube.com/watch?v=9RKEuV7-uKA&pp=ygUTaG93IHRvIG1ha2UgZnJpZW5kcw%3D%3D";
+        quit = true;
+        return;
+    }
 
     // Easter egg
     if (message === "gullible") {
@@ -160,38 +169,10 @@ async function sendMessage() {
     if (message === '/guide') {
         displayMessage('Click the Question Mark Button on the Left Side','special');
         return;
-    } else if (FIRSTFOUR === 'stfu') {
-        curse = true;
-        socket.emit('log',`${username}: ${message}`)
-        message = 'I love you!'
-    } else if (FIRSTSIX.toLowerCase() === 'nigger') {
-        curse = true;
-        socket.emit('log',`${username}: ${message}`)
-        message = "I'm extremely unfunny and deserve to die"
-    } else if (FIRSTFIVE.toLowerCase() === 'nigga') {
-        curse = true;
-        socket.emit('log',`${username}: ${message}`)
-        message = "I'm gay and forever will be lonely"
-    } else if (FIRSTFOUR.toLowerCase() === 'fuck') {
-        socket.emit('log',`${username}: ${message}`)
-        message = "I like boys!"
-        curse = true;
     }
 
 
 
-    if (quit === true) {
-        return;
-    }
-
-    if (curse === true) {
-        socket.emit('chat-message', message);
-        displayMessage("Please don't curse. Your precious life isn't worth wasting over malicious language. Please turn to God 🙏")
-        await sleep(7000);
-        window.location.href = "https://www.youtube.com/watch?v=9RKEuV7-uKA&pp=ygUTaG93IHRvIG1ha2UgZnJpZW5kcw%3D%3D";
-        quit = true;
-        return;
-    }
 
 
     // send to server (NO username anymore)
@@ -281,7 +262,6 @@ function handleLobbyChange(event) {
 
 lobbyButton.addEventListener('click', handleLobbyChange);
 lobbyInput.addEventListener('keydown', handleLobbyChange);
-
 // =======================
 // RECEIVE CHAT
 // =======================
