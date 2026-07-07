@@ -58,6 +58,7 @@ io.on('connection', (socket) => {
 
     // Chat Message
     socket.on('chat-message', (message) => {
+        console.log(`${username}: ${message}`)
         if (!currentLobby) return;
 
         socket.to(currentLobby).emit(
