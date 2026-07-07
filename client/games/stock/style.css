@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap');
+
+/* ===== RESET ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+
+body {
+    background: black;
+    color: white;
+
+    font-family: "Josefin Sans", sans-serif;
+
+    min-height: 100vh;
+    overflow: hidden;
+
+    position: relative;
+}
+
+/* ===== TITLE ===== */
+
+#title {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 1rem;
+}
+
+h1 {
+    background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    border-bottom: 3px solid green;
+
+    padding-bottom: 0.5rem;
+}
+
+.big-font {
+    font-size: clamp(3rem, 6vw, 6rem);
+}
+
+/* ===== CHART ===== */
+
+#chart {
+    width: 92vw;
+    height: 650px;
+
+    max-width: 1700px;
+
+    margin: 1.5rem auto;
+}
+
+/* ===== CONTROLS WRAPPER ===== */
+
+#controls,
+#settingsControls {
+    position: absolute;
+
+    bottom: 4vh;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 3rem;
+}
+
+/* ===== COLUMNS ===== */
+
+#firstCol,
+#secCol,
+#thirdCol,
+#fourCol,
+#settingsCol {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+/* ===== BUTTONS + INPUTS ===== */
+
+.actionButton,
+.actionInput {
+    width: 340px;
+    height: 95px;
+
+    border-radius: 22px;
+
+    transition: 0.25s ease;
+}
+
+/* ===== BUTTONS ===== */
+
+.actionButton {
+    border: 2px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.06);
+
+    color: white;
+
+    font-size: 2.3rem;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+
+.actionButton:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255,255,255,0.12);
+
+    border-color: rgba(255,255,255,0.35);
+}
+
+/* ===== INPUTS ===== */
+
+.actionInput {
+    padding: 0 1rem;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.06);
+
+    color: white;
+
+    font-size: 1.4rem;
+
+    outline: none;
+}
+
+.actionInput:focus {
+    border-color: rgba(255,255,255,0.4);
+
+    background: rgba(255,255,255,0.1);
+}
+
+/* ===== BUTTON STYLES ===== */
+
+#buyButton {
+    background: linear-gradient(to right, black, red, white);
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#sellButton {
+    background: linear-gradient(to right, cyan, purple);
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#startButton {
+    background: linear-gradient(to right, lime, green);
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+}
+
+.glow {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+}
+
+#cashoutButton {
+    background: linear-gradient(to right, orange, yellow);
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== STATS COLUMN (NO SHIFTING FIX) ===== */
+
+#fourCol {
+    width: 360px;
+    min-width: 360px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+/* ===== MONEY (STABLE WIDTH) ===== */
+
+#money {
+    width: 100%;
+
+    text-align: center;
+
+    color: lime;
+
+    font-size: clamp(3.5rem, 5vw, 6rem);
+    font-weight: 900;
+
+    text-shadow: 0 0 20px rgba(0,255,0,0.45);
+}
+
+/* ===== SHARES ===== */
+
+#shares {
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* ===== MENU SYSTEM ===== */
+
+.menu {
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s ease;
+}
+
+.menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== MENU SWITCH ===== */
+
+#menuswap {
+    position: absolute;
+
+    left: 1rem;
+    bottom: 4vh;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.7rem;
+}
+
+.menuButton {
+    width: 65px;
+    height: 65px;
+
+    border: 2px solid white;
+    border-radius: 14px;
+
+    background: rgb(184,184,184);
+
+    color: black;
+
+    font-size: 1.8rem;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.menuButton.active {
+    background: white;
+}
+
+.menuButton:hover {
+    transform: scale(1.08);
+
+    background: white;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1400px) {
+
+    #controls,
+    #settingsControls {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        width: 90%;
+    }
+
+    .actionButton,
+    .actionInput {
+        width: 260px;
+        height: 85px;
+    }
+
+    .actionButton {
+        font-size: 1.8rem;
+    }
+
+    #fourCol {
+        width: 300px;
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    #controls,
+    #settingsControls {
+        position: relative;
+
+        margin-top: 2rem;
+
+        left: auto;
+        transform: none;
+
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #chart {
+        height: 500px;
+    }
+
+    .actionButton,
+    .actionInput {
+        width: 320px;
+    }
+
+    #money,
+    #shares {
+        text-align: center;
+    }
+}
+
+#event {
+    width: 90vw;
+    height: 20vh;
+    border: 2px solid green;
+    transform: translate(0,-30%);
+    padding: 1%;
+    font-weight: 800;
+    font-size: 3vh;
+}
+
+#menu3 {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: black;
+    border: 2px solid gray;
+    border-radius: 30%;
+    color: white;
+    z-index: 9999;
+    text-decoration: none;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 25px;
+    font-size: 20px;
+}

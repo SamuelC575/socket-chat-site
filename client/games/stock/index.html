@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christain's Downfall</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+<body>
+    <a href="../games.html" id="exit">x</a>
+    <h1 id="title" class="big-font">
+        Christain's Downfall
+    </h1>
+
+    <div id="chart"></div>
+
+    <!-- Menu Swap -->
+    <div id="menuswap">
+        <button id="menu1Button" class="menuButton">1</button>
+        <button id="menu2Button" class="menuButton">2</button>
+        <button id="menu3Button" class="menuButton">3</button>
+    </div>
+
+    <!-- Menu 1 -->
+    <div id="menu1" class="menu active">
+
+        <div id="controls">
+
+            <div id="firstCol" class="controlCol">
+                <button id="buyButton" class="actionButton">
+                    Buy
+                </button>
+
+                <input
+                    id="buyInput"
+                    type="text"
+                    class="actionInput"
+                    placeholder="Buy Shares"
+                    disabled
+                >
+            </div>
+
+            <div id="secCol" class="controlCol">
+                <button id="sellButton" class="actionButton">
+                    Sell
+                </button>
+
+                <input
+                    id="sellInput"
+                    type="text"
+                    class="actionInput"
+                    placeholder="Sell Shares"
+                    disabled
+                >
+            </div>
+
+            <div id="thirdCol" class="controlCol">
+                <button id="startButton" class="actionButton glow">
+                    Start
+                </button>
+
+                <button id="cashoutButton" class="actionButton">
+                    CashOut
+                </button>
+            </div>
+
+            <div id="fourCol" class="controlCol">
+                <div id="money">$1000</div>
+                <div id="shares">Shares: 0</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Menu 2 -->
+    <div id="menu2" class="menu">
+
+        <div id="settingsControls">
+
+            <div id="settingsCol" class="controlCol">
+                <input
+                    id="delayInput"
+                    type="text"
+                    class="actionInput"
+                    placeholder="Delay (ms)"
+                    disabled
+                >
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Menu 3 -->
+    <div id="menu3" class="menu">
+        <div id="event">Event</div>
+    </div>
+
+
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
